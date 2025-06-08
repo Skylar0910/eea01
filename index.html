@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>English Passage Memorization</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2, h3 {
+      color: #333;
+    }
+    p {
+      line-height: 1.6;
+    }
+    button {
+      margin: 10px 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    .hidden {
+      display: none;
+    }
+    .blank {
+      background-color: #ffeb3b;
+      border: 1px solid #ccc;
+      padding: 2px 4px;
+      margin: 0 2px;
+    }
+    .guide {
+      background-color: #f9f9f9;
+      border-left: 5px solid #007BFF;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- 💡 활용 방법 안내 -->
+    <div class="guide">
+      <h3>📘 활용 방법 (How to Use)</h3>
+      <ol>
+        <li><strong>전체 지문 보기:</strong> <em>Toggle Full Text</em> 버튼을 눌러 지문을 익히세요.</li>
+        <li><strong>빈칸 모드:</strong> <em>Blank Mode</em>를 눌러 일부 단어가 가려진 상태로 암기해보세요.</li>
+        <li><strong>기억에 의존해 쓰기:</strong> <em>Try Yourself</em>로 지문 전체를 직접 입력해 보세요.</li>
+        <li><strong>Check Answer:</strong> 입력한 내용이 맞는지 확인할 수 있어요.</li>
+      </ol>
+      <p>💡 하루 3회 반복, 친구와 함께 테스트하면 더 좋아요!</p>
+    </div>
+
+    <h2>Day 1: First Thing in the Morning</h2>
+    
+    <!-- 전체 지문 -->
+    <div id="originalText">
+      <p>
+        Dan’s alarm clock rings and he wakes up. <br>
+        He gets out of bed. <br>
+        He goes into the bathroom. <br>
+        After using the toilet and flushing it, he washes his hands. <br>
+        He brushes his teeth, shaves, and takes a shower. <br>
+        He dries himself off with a towel. <br>
+        Then, he brushes his hair. <br>
+        He gets dressed. <br>
+        He makes breakfast and eats it. <br>
+        Then, he leaves the apartment.
+      </p>
+    </div>
+
+    <!-- 빈칸 처리된 지문 -->
+    <div id="blankedText" class="hidden">
+      <p>
+        Dan’s alarm clock <span class="blank">_____</span> and he <span class="blank">_____</span> up. <br>
+        He <span class="blank">_____</span> out of bed. <br>
+        He goes into the <span class="blank">_____</span>. <br>
+        After using the toilet and flushing it, he <span class="blank">_____</span> his hands. <br>
+        He brushes his teeth, <span class="blank">_____</span>, and takes a shower. <br>
+        He dries himself off with a <span class="blank">_____</span>. <br>
+        Then, he brushes his <span class="blank">_____</span>. <br>
+        He gets <span class="blank">_____</span>. <br>
+        He makes breakfast and <span class="blank">_____</span> it. <br>
+        Then, he <span class="blank">_____</span> the apartment.
+      </p>
+    </div>
+
+    <!-- 입력 연습 모드 -->
+    <div id="inputMode" class="hidden">
+      <label for="userInput">Try typing the full passage from memory:</label>
+      <textarea id="userInput" rows="10"></textarea>
+      <button onclick="checkAnswer()">Check Answer</button>
+      <p id="feedback"></p>
+    </div>
+
+    <!-- 버튼 -->
+    <button onclick="toggleText()">Toggle Full Text</button>
+    <button onclick="toggleBlanks()">Blank Mode</button>
+    <button onclick="toggleInput()">Try Yourself</button>
+  </div>
+
+  <!-- 자바스크립트: 기능 제어 -->
+  <script>
+    const originalText = document.getElementById("originalText");
+    const blankedText = document.getElementById("blankedText");
+    const inputMode = document.getElementById("inputMode");
+    const feedback = document.getElementById("feedback");
+
+    const fullPassage = `Dan’s alarm clock rings and he wakes up.
+He gets out of bed.
+He goes into the bathroom.
+After using the toilet and flushing it, he washes his hands.
+He brushes his teeth, shaves, and takes a shower.
+He dries himself off with a towel.
+Then, he brushes his hair.
+He gets dressed.
+He makes breakfast and eats it.
+Then, he leaves the apartment.`;
+
+    function toggleText() {
+      originalText.classList.toggle("hidden");
+    }
+
+    function toggleBlanks() {
+      blankedText.classList.toggle("hidden");
+    }
+
+    function toggleInput() {
+      inputMode.classList.toggle("hidden");
+      feedback.textContent = "";
+    }
+
+    function checkAnswer() {
+      const userInput = document.getElementById("userInput").value.trim();
+      if (userInput === fullPassage) {
+        feedback.textContent = "✅ Perfect! You typed it exactly right.";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = "❌ Not quite. Try again or compare with the full text.";
+        feedback.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
